@@ -1,7 +1,7 @@
 class Upload < ActiveRecord::Base
   attr_accessible :num_records
 
-  has_many :purchases
+  has_many :purchases, :dependent => :destroy
 
   def self.create_from_data(text)
     parser = Parser.new(text)

@@ -24,4 +24,13 @@ describe Upload do
     end
   end
 
+  describe ".destroy" do
+    it "removes all the associated purchases" do
+      upload = Upload.create_from_data(data)
+      Purchase.count.should eq(4)
+      upload.destroy
+      Purchase.count.should eq(0)
+    end
+  end
+
 end
