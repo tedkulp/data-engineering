@@ -30,11 +30,12 @@
           </a>
           <a class="brand" href="#">DataEngineering</a>
           <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
+            <ul class="nav pull-right">
+              <% if current_user %>
+                <li><a href="#">Signed in as <%= current_user.name %></a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/signout">Sign Out</a></li>
+              <% end %>
           </div><!--/.nav-collapse -->
         </div>
       </div>
