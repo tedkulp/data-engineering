@@ -2,8 +2,14 @@ require 'spec_helper'
 
 describe "Uploads" do
   describe "GET /uploads" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+    it "should not work if the user isn't logged in" do
+      get uploads_path
+      response.status.should be(302)
+      response.location.should include("/auth/open_id")
+    end
+
+    it "should work after logged in" do
+      post '/auth/developer/callback', :name => 'Some User', :email => 'someone@someplace.com'
       get uploads_path
       response.status.should be(200)
     end

@@ -31,7 +31,7 @@ describe UploadsController do
   # in order to pass any filters (e.g. authentication) defined in
   # UploadsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    { :user_id => '1' }
   end
 
   describe "GET index" do
