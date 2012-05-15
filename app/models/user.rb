@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   cattr_accessor :current_user
 
+  has_many :uploads, :dependent => :nullify
+
   def self.from_omniauth(auth)
     where(:provider => auth['provider'], :uid => auth['uid']).first || create_with_omniauth(auth)
   end

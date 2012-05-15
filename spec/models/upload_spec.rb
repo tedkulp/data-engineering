@@ -22,6 +22,12 @@ describe Upload do
       upload.should_not be_nil
       upload.purchases.should be_empty
     end
+
+    it "should optionally allow a user to be passed so we know who uploaded the data" do
+      user = create(:user)
+      upload = Upload.create_from_data(data, user)
+      upload.user.should eq(user)
+    end
   end
 
   describe ".destroy" do
