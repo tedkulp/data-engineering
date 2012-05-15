@@ -1,4 +1,7 @@
 class UploadsController < ApplicationController
+
+  before_filter :authenticate!
+
   # GET /uploads
   # GET /uploads.json
   def index
