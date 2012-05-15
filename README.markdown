@@ -30,8 +30,8 @@ allow anyone with a valid OpenID to login and use the system.
 
 1. Clone the repository: `git clone git://github.com/tedkulp/data-engineering.git`
 1. Install all the required gems: `bundle install`
-1. Create the SQLite database: `rake db:migrate`
-1. Start up the rails server on port 3000: `rails s`
+1. Create the SQLite database: `bundle exec rake db:migrate`
+1. Start up the rails server on port 3000: `bundle exec rails s`
 1. Point your browser to: `http://localhost:3000`
 
 ## TODO
