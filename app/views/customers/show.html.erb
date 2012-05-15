@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @customer.name %>
+</p>
+
+<% unless @customer.orders.empty? %>
+  <h2>Orders</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @customer.orders.each do |order| %>
+      <tr>
+        <td><%= order.item.description %></td>
+        <td><%= order.quantity %></td>
+        <td><%= number_to_currency(order.item.price) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to 'Back', customers_path %>

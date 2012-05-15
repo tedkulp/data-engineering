@@ -31,9 +31,11 @@ class Upload < ActiveRecord::Base
       if purchase.valid?
         purchase.save
         upload.purchases << purchase
+        Normalizer.normalize(attribute_hash)
       end
     end
 
     upload
   end
+
 end

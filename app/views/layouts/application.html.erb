@@ -43,7 +43,17 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span12">
+        <div class="span2">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li><%= link_to "Merchants", "/merchants" %></li>
+              <li><%= link_to "Customers", "/customers" %></li>
+              <li><%= link_to "Orders", "/orders" %></li>
+              <li><%= link_to "Uploads", "/uploads" %></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span10">
           <%= yield %>
         </div>
       </div><!--/row-->
