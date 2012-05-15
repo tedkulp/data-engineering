@@ -24,7 +24,7 @@ describe UploadsController do
   # Upload. As you add validations to Upload, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    attributes_for(:upload)
   end
   
   # This should return the minimal set of values that should be in the session
@@ -54,14 +54,6 @@ describe UploadsController do
     it "assigns a new upload as @upload" do
       get :new, {}, valid_session
       assigns(:upload).should be_a_new(Upload)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested upload as @upload" do
-      upload = Upload.create! valid_attributes
-      get :edit, {:id => upload.to_param}, valid_session
-      assigns(:upload).should eq(upload)
     end
   end
 
@@ -98,50 +90,6 @@ describe UploadsController do
         Upload.any_instance.stub(:save).and_return(false)
         post :create, {:upload => {}}, valid_session
         response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested upload" do
-        upload = Upload.create! valid_attributes
-        # Assuming there are no other uploads in the database, this
-        # specifies that the Upload created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Upload.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => upload.to_param, :upload => {'these' => 'params'}}, valid_session
-      end
-
-      it "assigns the requested upload as @upload" do
-        upload = Upload.create! valid_attributes
-        put :update, {:id => upload.to_param, :upload => valid_attributes}, valid_session
-        assigns(:upload).should eq(upload)
-      end
-
-      it "redirects to the upload" do
-        upload = Upload.create! valid_attributes
-        put :update, {:id => upload.to_param, :upload => valid_attributes}, valid_session
-        response.should redirect_to(upload)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the upload as @upload" do
-        upload = Upload.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Upload.any_instance.stub(:save).and_return(false)
-        put :update, {:id => upload.to_param, :upload => {}}, valid_session
-        assigns(:upload).should eq(upload)
-      end
-
-      it "re-renders the 'edit' template" do
-        upload = Upload.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Upload.any_instance.stub(:save).and_return(false)
-        put :update, {:id => upload.to_param, :upload => {}}, valid_session
-        response.should render_template("edit")
       end
     end
   end

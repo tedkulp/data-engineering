@@ -16,7 +16,7 @@ describe UploadsController do
     end
 
     it "routes to #edit" do
-      get("/uploads/1/edit").should route_to("uploads#edit", :id => "1")
+      get("/uploads/1/edit").should_not route_to("uploads#edit", :id => "1")
     end
 
     it "routes to #create" do
@@ -24,7 +24,7 @@ describe UploadsController do
     end
 
     it "routes to #update" do
-      put("/uploads/1").should route_to("uploads#update", :id => "1")
+      put("/uploads/1").should_not route_to("uploads#update", :id => "1")
     end
 
     it "routes to #destroy" do
