@@ -46,4 +46,35 @@ describe Parser do
       parser.parse.should be_empty
     end
   end
+
+  describe ".sum_column" do
+    let(:parser) { Parser.new }
+
+    it "returns 0 if parse hasn't been run yet" do
+      parser.sum_column('test').should be_zero
+    end
+
+    it "returns 0 if there is no valid data" do
+      parser.text = "Blah blah blah"
+      parser.sum_column('test').should be_zero
+    end
+
+    it "returns 0 if the column doesn't exist" do
+      parser.text = "col1\n1.5\n3.0\n1.0"
+      parser.parse
+      parser.sum_column('test').should be_zero
+    end
+
+    it "returns the sum of a column after parse" do
+      parser.text = "col1\n1.5\n3.0\n1.0"
+      parser.parse
+      parser.sum_column('col1').should eq(5.5)
+    end
+
+    it "quietly ignores non-numerical data" do
+      parser.text = "col1\n1.5\nq\n1.0"
+      parser.parse
+      parser.sum_column('col1').should eq(2.5)
+    end
+  end
 end

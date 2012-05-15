@@ -21,15 +21,14 @@ class Parser
   # Returns a new Parser object instance
   def initialize(text = "")
     @text = text
-    reset_headers!
+    reset!
   end
 
   # Public: Parse the previous given text into a resulting hash
   #
   # Returns an array
   def parse
-    result = []
-    reset_headers!
+    reset!
 
     unless text.nil?
       text.each_line do |line|
@@ -39,14 +38,24 @@ class Parser
             set_headers(items)
           else
             items_to_hash(items) do |item_hash|
-              result << item_hash
+              @result << item_hash
             end
           end
         end
       end
     end
 
-    result
+    @result
+  end
+
+  def sum_column(column_name)
+    @result.inject(0.0) { |sum, item_hash|
+      if item_hash.has_key?(column_name)
+        sum + item_hash[column_name].to_f
+      else
+        sum
+      end
+    }
   end
 
   private
@@ -113,13 +122,14 @@ class Parser
     }
   end
 
-  # Private: Clears out the currently saved headers so
-  # they aren't used in future runs of the parse
-  # method.
+  # Private: Clears out the currently saved headers and
+  # results so # they aren't used in future runs of
+  # the parse method.
   #
   # Returns nothing
-  def reset_headers!
+  def reset!
     @headers = []
+    @result = []
   end
 
 end
