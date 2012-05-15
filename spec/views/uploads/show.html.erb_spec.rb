@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "uploads/show" do
   before(:each) do
-    @upload = assign(:upload, stub_model(Upload))
+    @upload = assign(:upload, build_stubbed(:upload))
   end
 
   it "renders attributes in <p>" do

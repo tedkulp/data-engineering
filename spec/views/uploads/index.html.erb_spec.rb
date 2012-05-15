@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "uploads/index" do
   before(:each) do
     assign(:uploads, [
-      stub_model(Upload),
-      stub_model(Upload)
+      build_stubbed(:upload),
+      build_stubbed(:upload)
     ])
   end
 

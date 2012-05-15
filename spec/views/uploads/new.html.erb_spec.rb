@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "uploads/new" do
   before(:each) do
-    assign(:upload, stub_model(Upload).as_new_record)
+    assign(:upload, build_stubbed(:upload))
   end
 
   it "renders new upload form" do
