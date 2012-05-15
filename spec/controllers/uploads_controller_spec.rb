@@ -59,6 +59,8 @@ describe UploadsController do
 
   describe "POST create" do
     describe "with valid params" do
+      let(:data_file) { File.dirname(__FILE__) + "/../../example_input.tab" }
+
       it "creates a new Upload" do
         expect {
           post :create, {:upload => valid_attributes}, valid_session
@@ -69,11 +71,19 @@ describe UploadsController do
         post :create, {:upload => valid_attributes}, valid_session
         assigns(:upload).should be_a(Upload)
         assigns(:upload).should be_persisted
+        assigns(:upload).purchases.should be_empty
       end
 
       it "redirects to the created upload" do
         post :create, {:upload => valid_attributes}, valid_session
         response.should redirect_to(Upload.last)
+      end
+
+      it "creates the purchase objects if given data" do
+        file = Rack::Test::UploadedFile.new(data_file, "text/plain")
+        post :create, {:upload => valid_attributes, :data_file => file}, valid_session
+        assigns(:upload).should be_a(Upload)
+        assigns(:upload).purchases.should have(4).purchases
       end
     end
 

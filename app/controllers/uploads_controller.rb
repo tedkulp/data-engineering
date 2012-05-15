@@ -35,7 +35,11 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(params[:upload])
+    if params.has_key?(:data_file)
+      @upload = Upload.create_from_data(params[:data_file].read)
+    else
+      @upload = Upload.new(params[:upload])
+    end
 
     respond_to do |format|
       if @upload.save
