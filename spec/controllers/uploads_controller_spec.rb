@@ -31,7 +31,8 @@ describe UploadsController do
   # in order to pass any filters (e.g. authentication) defined in
   # UploadsController. Be sure to keep this updated too.
   def valid_session
-    { :user_id => '1' }
+    @user = create(:user)
+    { :user_id => @user.id }
   end
 
   describe "GET index" do
@@ -84,6 +85,12 @@ describe UploadsController do
         post :create, {:upload => valid_attributes, :data_file => file}, valid_session
         assigns(:upload).should be_a(Upload)
         assigns(:upload).purchases.should have(4).purchases
+      end
+
+      it "assigns the current_user to the upload" do
+        file = Rack::Test::UploadedFile.new(data_file, "text/plain")
+        post :create, {:upload => valid_attributes, :data_file => file}, valid_session
+        assigns(:upload).user.should eq(@user)
       end
     end
 

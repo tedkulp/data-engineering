@@ -39,7 +39,7 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     if params.has_key?(:data_file)
-      @upload = Upload.create_from_data(params[:data_file].read)
+      @upload = Upload.create_from_data(params[:data_file].read, current_user)
     else
       @upload = Upload.new(params[:upload])
     end

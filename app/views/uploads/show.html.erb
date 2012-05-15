@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<% unless @upload.user.blank? %>
+  <p><strong>Uploaded By: <%= @upload.user.name %></strong></p>
+<% end %>
 <p><strong>Data Uploaded: <%= time_tag(@upload.created_at) %></strong></p>
 
 <% if @upload.purchases.empty? %>
