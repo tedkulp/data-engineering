@@ -1,4 +1,34 @@
 <p id="notice"><%= notice %></p>
 
+<p><strong>Data Uploaded: <%= time_tag(@upload.created_at) %></strong></p>
+
+<% if @upload.purchases.empty? %>
+  <p><strong>No Data</strong></p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Purchaser Name</td>
+        <td>Item Description</td>
+        <td>Item Price</td>
+        <td>Purchase Count</td>
+        <td>Merchant Name</td>
+        <td>Merchant Address</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @upload.purchases.each do |purchase| %>
+        <tr>
+          <td><%= purchase.purchaser_name %></td>
+          <td><%= purchase.item_description %></td>
+          <td><%= number_to_currency(purchase.item_price) %></td>
+          <td><%= purchase.purchase_count %></td>
+          <td><%= purchase.merchant_name %></td>
+          <td><%= purchase.merchant_address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <%= link_to 'Back', uploads_path %>

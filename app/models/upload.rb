@@ -10,8 +10,8 @@ class Upload < ActiveRecord::Base
     upload = Upload.new(:num_records => result.count)
     upload.save
 
-    result.each do |item_hash|
-      purchase = Purchase.new(item_hash)
+    result.each do |attribute_hash|
+      purchase = Purchase.new(attribute_hash)
       if purchase.valid?
         purchase.save
         upload.purchases << purchase
