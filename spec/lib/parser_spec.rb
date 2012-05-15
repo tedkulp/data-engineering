@@ -35,8 +35,8 @@ describe Parser do
     end
 
     it "will convert headers with spaces to underscores" do
-      parser.text = "some value\tsomething\nvalue 1\tvalue 2\n"
-      parser.parse.should.should eq([{'some_value' => 'value 1', 'something' => 'value 2'}])
+      parser.text = "some value\tsomething else is here\nvalue 1\tvalue 2\n"
+      parser.parse.should.should eq([{'some_value' => 'value 1', 'something_else_is_here' => 'value 2'}])
     end
 
     it "will skip a row if there number of columns in a row doesn't match the number in the header" do

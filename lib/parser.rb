@@ -91,16 +91,33 @@ class Parser
     result
   end
 
+  # Private: Looks to see if there are any headers current
+  # set
+  #
+  # Returns a Boolean
   def headers?
     @headers.empty?
   end
 
+  # Private: Sets the headers used for assigning keys
+  # to the given values in the result. Additionally, it
+  # will convert any headers with a space in the title
+  # to having underscores instead.
+  #
+  # items - An Array of header strings
+  #
+  # Returns nothing
   def set_headers(items)
     @headers = items.map { |item|
       item.gsub(/ /, '_')
     }
   end
 
+  # Private: Clears out the currently saved headers so
+  # they aren't used in future runs of the parse
+  # method.
+  #
+  # Returns nothing
   def reset_headers!
     @headers = []
   end
