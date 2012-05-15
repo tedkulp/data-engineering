@@ -36,7 +36,7 @@ class Parser
         items = parse_line(line)
         unless items.empty?
           if headers?
-            @headers = items
+            set_headers(items)
           else
             items_to_hash(items) do |item_hash|
               result << item_hash
@@ -93,6 +93,12 @@ class Parser
 
   def headers?
     @headers.empty?
+  end
+
+  def set_headers(items)
+    @headers = items.map { |item|
+      item.gsub(/ /, '_')
+    }
   end
 
   def reset_headers!

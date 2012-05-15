@@ -34,6 +34,11 @@ describe Parser do
       parser.parse.should be_empty
     end
 
+    it "will convert headers with spaces to underscores" do
+      parser.text = "some value\tsomething\nvalue 1\tvalue 2\n"
+      parser.parse.should.should eq([{'some_value' => 'value 1', 'something' => 'value 2'}])
+    end
+
     it "will skip a row if there number of columns in a row doesn't match the number in the header" do
       parser.text = "col1\tcol2\nval1\n"
       parser.parse.should be_empty

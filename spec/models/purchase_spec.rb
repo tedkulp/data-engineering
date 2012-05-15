@@ -66,5 +66,4 @@ describe Purchase do
       purchase.should_not be_valid
     end
   end
-
 end
