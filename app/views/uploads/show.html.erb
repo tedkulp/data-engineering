@@ -4,6 +4,7 @@
   <p><strong>Uploaded By: <%= @upload.user.name %></strong></p>
 <% end %>
 <p><strong>Data Uploaded: <%= time_tag(@upload.created_at) %></strong></p>
+<p><strong>Total Revenue: <%= number_to_currency(@upload.total_revenue) %></strong></p>
 
 <% if @upload.purchases.empty? %>
   <p><strong>No Data</strong></p>

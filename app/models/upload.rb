@@ -1,5 +1,5 @@
 class Upload < ActiveRecord::Base
-  attr_accessible :num_records
+  attr_accessible :num_records, :total_revenue
 
   has_many :purchases, :dependent => :destroy
   belongs_to :user
@@ -20,7 +20,7 @@ class Upload < ActiveRecord::Base
     parser = Parser.new(text)
     result = parser.parse
 
-    upload = Upload.new(:num_records => result.count)
+    upload = Upload.new(:num_records => result.count, :total_revenue => parser.sum_column('item_price'))
     unless user.nil?
       upload.user = user
     end

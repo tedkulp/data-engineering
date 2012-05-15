@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th># Records</th>
+      <th>Total Revenue</th>
       <th>Uploaded at</th>
       <th>Uploaded by</th>
       <th></th>
@@ -14,6 +15,7 @@
     <% @uploads.each do |upload| %>
       <tr>
         <td><%= upload.num_records %></td>
+        <td><%= number_to_currency(upload.total_revenue) %></td>
         <td><%= upload.created_at %></td>
         <td><%= upload.user.name unless upload.user.blank? %>
         <td><%= link_to 'Show', upload %></td>

@@ -48,6 +48,12 @@ class Parser
     @result
   end
 
+  # Public: Sums the total of any parsed column, asssuming
+  # it's numeric data.
+  #
+  # column_name - The name of the column to sum
+  #
+  # Returns a Float
   def sum_column(column_name)
     @result.inject(0.0) { |sum, item_hash|
       if item_hash.has_key?(column_name)

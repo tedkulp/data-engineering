@@ -75,6 +75,10 @@ describe Parser do
       parser.text = "col1\n1.5\nq\n1.0"
       parser.parse
       parser.sum_column('col1').should eq(2.5)
+
+      parser.text = "col1\nblah\nq\nslksjdfklj"
+      parser.parse
+      parser.sum_column('col1').should be_zero
     end
   end
 end

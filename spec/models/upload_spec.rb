@@ -23,6 +23,11 @@ describe Upload do
       upload.purchases.should be_empty
     end
 
+    it "should set the total_revenue of all the purchases if given valid data" do
+      upload = Upload.create_from_data(data)
+      upload.total_revenue.should eq(30.0)
+    end
+
     it "should optionally allow a user to be passed so we know who uploaded the data" do
       user = create(:user)
       upload = Upload.create_from_data(data, user)
